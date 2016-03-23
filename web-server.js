@@ -59,7 +59,6 @@ app.post('/recipes', function(req, res) {
   recipe.title = req.body.title;
   recipe.description = req.body.description;
   recipe.ingredients = req.body.ingredients;
-  recipe.ingredients = req.body.ingredients;
   recipe.instructions = req.body.instructions;
 
   recipes_map[recipe.id] = recipe;
