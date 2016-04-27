@@ -8,7 +8,7 @@ app.configure(function(){
   app.use(express.static(__dirname + '/app'));
   app.use(app.router);
 });
-//test line
+
 var recipes_map = {
   '1': {
     "id": "1",
