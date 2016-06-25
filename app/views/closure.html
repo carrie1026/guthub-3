@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>closure</title>
+    <style>
+        li{
+            margin:20px 0;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li id="a1">1</li>
+        <li id="a2">2</li>
+        <li id="a3">3</li>
+        <li id="a4">4</li>
+    </ul>
+    <script>
+        var list = document.getElementsByTagName("li");
+        for(var i=1; i<=list.length; i++){
+            var id=document.getElementById("a"+i);
+            id.i="a"+i;
+            id.onclick = function(){
+                console.log(this.i)
+            };
+        }
+
+
+        //错误的写法
+        /*for(var i = 1 , len = list.length ; i < len ; i++){
+            list[ i ].onmouseover = function(){
+                alert(i);
+            };
+        }*/
+    </script>
+</body>
+</html>
