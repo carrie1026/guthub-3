@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>closure</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <style>
         li{
             margin:20px 0;
+        }
+        div{
+            display:inline-block;
+            width:50px;
+            height:30px;
+            border:1px solid #ccc;
         }
     </style>
 </head>
@@ -16,15 +23,26 @@
         <li id="a3">3</li>
         <li id="a4">4</li>
     </ul>
+    <div>1</div><div>2</div><div>3</div><div>4</div>
     <script>
-        var list = document.getElementsByTagName("li");
+        /*var list = document.getElementsByTagName("li");
         for(var i=1; i<=list.length; i++){
             var id=document.getElementById("a"+i);
             id.i="a"+i;
             id.onclick = function(){
                 console.log(this.i)
             };
-        }
+        }*/
+        $(function(){
+            $("ul").on("click","li",function(){
+                var _id = $(this).attr("id");
+                console.log(_id);
+            });
+            /*$("li").mouseover(function(){
+                var _id = $(this).attr("id");
+                console.log(_id);
+            })*/
+        });
 
 
         //错误的写法
@@ -33,6 +51,47 @@
                 alert(i);
             };
         }*/
+
+
+        //数组去重
+        //方案一
+        function unique(arr) {
+            var result = [],isRep;
+            for (var i = 0; i <= arr.length; i++) {
+                isRep = false;
+                for (var j = 0; j <= result.length; j++) {
+                    if (arr [i] == result [j] ) {
+                        isRep = true;
+                        break;
+                    }
+                }
+                if (!isRep) {
+                    result.push(arr [i] );
+                }
+            }
+            return result;
+        }
+
+        //方案二
+        //创建一个新的数组存放结果
+        //创建一个空对象
+        //for循环时，每次取出一个元素与对象进行对比，如果这个元素不重复，则把它存放到结果数组中，
+        //同时把这个元素的内容作为对象的一个属性，并赋值为1，存入到第2步建立的对象中。
+        //就是每次从原数组中取出一个元素，然后到对象中去访问这个属性，如果能访问到值，则说明重复。
+        function oSort(arr){
+            var result ={};
+            var newArr=[];
+            for(var i=0;i<arr.length;i++){
+                if(!result[arr [i] ]){
+
+                    newArr.push(arr [i] );
+                    result[arr [i] ]=1;
+                }
+            }
+            return newArr
+        }
+        var arr = [2, 3, 5, 2, 3];
+        console.log(unique(arr));
     </script>
 </body>
 </html>

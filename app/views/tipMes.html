@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tipMessage</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        $(function(){
+            function tipMes(str){
+                var _box = "<div class='_mesBox'>" + str + "</div>";
+                var _div = $(".inputBox");
+                _div.append(_box);
+            }
+            $(".ClickButton").click(function(){
+                tipMes("abc");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="inputBox">
+        <button class="ClickButton">click</button>
+    </div>
+</body>
+</html>
