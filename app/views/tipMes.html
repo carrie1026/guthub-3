@@ -16,10 +16,39 @@
             });
         });
     </script>
+    <style>
+        /* 默认验证 1*/
+        /*===包含required的表单===*/
+        /* 无效 */
+        input:required:invalid{
+            CSS代码
+        }
+        /* 有效 */
+        input:required:valid{
+            CSS代码
+        }
+
+
+        /* 默认验证 2*/
+        ::-webkit-validation-bubble { min-width:152px; margin-top: -1px;}
+        ::-webkit-validation-bubble-arrow { border: 1px solid #F7CE39; background: #FFFBC7; /* position:relative; */ top: 4px; left: 0px; }
+        ::-webkit-validation-bubble-arrow-clipper { text-align: center; }
+        ::-webkit-validation-bubble-heading { color: #444; }
+        ::-webkit-validation-bubble-message { border: 1px solid #F7CE39; background: #FFFBC7; border-radius: 3px; }
+        ::-webkit-validation-bubble-text-block { font-size: 12px; }
+    </style>
 </head>
 <body>
     <div class="inputBox">
         <button class="ClickButton">click</button>
+
+        <!--默认验证 1-->
+        <input type="text" name="user_name" required oninvalid="setCustomValidity('不能为空')" oninput="setCustomValidity('')" />
+
+        <!--默认验证 2-->
+        <form>
+            <input type="email" required><input type="submit">
+        </form>
     </div>
 </body>
 </html>
