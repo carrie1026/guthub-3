@@ -92,6 +92,29 @@
         }
         var arr = [2, 3, 5, 2, 3];
         console.log(unique(arr));
+
+
+        //循环注意
+        //返回最后值
+        //每一次循环，新的i值都会覆盖旧值，导致最后输出的是最后一轮的i的值
+        var a = [];
+        for (var i = 0; i < 10; i++) {
+            a[i] = function () {
+                console.log(i);
+            };
+        }
+        a[6](); // 10
+
+        //用let申明变量
+        //当前的i只在本轮循环有效，
+        //所以每一次循环的i其实都是一个新的变量，所以最后输出的是6
+        var a = [];
+        for (let i = 0; i < 10; i++) {
+            a[i] = function () {
+                console.log(i);
+            };
+        }
+        a[6](); // 6
     </script>
 </body>
 </html>
