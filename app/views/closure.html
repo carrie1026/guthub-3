@@ -25,6 +25,7 @@
     </ul>
     <div>1</div><div>2</div><div>3</div><div>4</div>
     <script>
+        //1
         /*var list = document.getElementsByTagName("li");
         for(var i=1; i<=list.length; i++){
             var id=document.getElementById("a"+i);
@@ -33,16 +34,30 @@
                 console.log(this.i)
             };
         }*/
+
+        //2
         $(function(){
-            $("ul").on("click","li",function(){
+            /*$("ul").on("click","li",function(){
                 var _id = $(this).attr("id");
                 console.log(_id);
-            });
+            });*/
+
+
+
             /*$("li").mouseover(function(){
                 var _id = $(this).attr("id");
                 console.log(_id);
             })*/
         });
+
+        //3
+        var list = document.getElementsByTagName("li");
+        for(let i=1; i<=list.length; i++){
+            let id=document.getElementById("a"+i);
+            id.onclick = function(){
+                console.log("a"+i)
+            };
+        }
 
 
         //错误的写法
