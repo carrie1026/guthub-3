@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        var count = 1000;
+        function start(){
+            $("#testScroll1").html('');
+            $("#testScroll2").html('');
+            timeBox = setInterval(function(){
+                $("#testScroll1").append('number:['+count+']--->I Love You\n')
+                var scrollTop = $("#testScroll1")[0].scrollHeight;
+                $("#testScroll1").scrollTop(scrollTop);
+                $("#testScroll2").append('number:['+count+']--->I Love You<br/>')
+                $("#testScroll2").scrollTop($("#testScroll2")[0].scrollHeight);
+                count--;
+                if(count == 0){
+                    clearInterval(timeBox);
+                    count = 1000;
+                }
+            },1000);
+        }
+
+        function stop(){
+            count = 1000;
+            clearInterval(timeBox);
+        }
+    </script>
+</head>
+<body>
+<textarea id="testScroll1" style="width:300px; height: 200px;border: 1px #ccc solid; resize:none;"></textarea>
+<div id="testScroll2" style="width:300px; height: 200px;border: 1px #ccc solid; overflow-y: scroll;float: left;"></div>
+<input type="button" value="Start" onclick="start();">
+<input type="button" value="Stop" onclick="stop();">
+
+</body>
+</html>
