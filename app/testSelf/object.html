@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>extent json</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        $(function(){
+            var arr1 = [
+                {a1:1, b1:2},
+                {a2:12,b2:22}
+            ];
+
+            var arr2 =[
+                {c1:3,d1:4,e1:5},
+                {c2:3,d2:4,e2:5}
+            ];
+
+            var objs=[];
+
+            for(var x in arr1){
+                objx = arr1[x];
+                objy = arr2[x];
+                object = $.extend({}, objy, objx);
+                objs.push(object);
+
+            }
+
+            //console.log(objs);
+
+
+
+
+
+            var obj1 = {a:1,b:2};
+            var obj2 = {c:3,d:4,e:5};
+            var obj3 ={};
+
+            $.each(obj2, function(){
+                if(obj2.d){
+                    var v = obj2.d;
+                    return obj3.d = v;
+                }
+            });
+            $.extend(true, obj1, obj3);
+            //console.log(obj1);
+
+
+
+
+
+
+            function getJson(key){
+                var objx = {a:1,b:2};
+                var objy = {c:3,d:4,e:5};
+                var objz ={};
+
+                var eValue=eval('objy.'+key);
+
+                console.log(eValue);
+            }
+            //getJson("d");
+
+
+
+
+
+
+            var obja = {c:3,d:4,e:5};
+            var objb ={
+                c:obja.c,
+                d:obja.d
+            };
+
+            console.log(objb);
+
+
+        });
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
