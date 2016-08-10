@@ -67,7 +67,7 @@
     var app = angular.module("myApp", []);
     app.controller("myCtrl", function ($scope, $http) {
         $scope.currentPage = 1;
-        $scope.pageSize = 3
+        $scope.pageSize = 3;
         $http.get("../data/data.json").then(function (response) {
             //数据源
             $scope.data = response.data.student;
@@ -80,7 +80,6 @@
                 for(let i=0;i<$scope.items.length;i++){
                     if(m === true){
                         $scope.items[i].state=true;
-                                                //$scope.selBox.push({id:$scope.items[i].id});
                     }else {
                         $scope.items[i].state=false;
 
@@ -113,21 +112,20 @@
             };
 
 
-            //设置当前选中页样式
-
             //上一页
 
             $scope.Previous2 = function () {
-                if($scope.currentPage>1){
-                    $scope.currentPage--
+                if($scope.currentPage > 1){
+                    $scope.currentPage--;
+                }
+            };
+            //下一页
+            $scope.next2 = function(){
+                let pages = Math.ceil($scope.items.length / $scope.pageSize);
+                if(currentPage < pages){
+                    $scope.currentPage++;
                 }
 
-            };
-
-            //下一页
-
-            $scope.next2 = function(){
-                $scope.currentPage++
             }
         });
     }).filter('offset', function () {
