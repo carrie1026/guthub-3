@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="pof" ng-controller="Main">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="http://st.pimg.net/cdn/libs/bootstrap/2.2/css/bootstrap.min.css">
+    <script type="text/javascript" src="http://st.pimg.net/cdn/libs/jquery/1.8/jquery.min.js"></script>
+    <script type="text/javascript" src="http://st.pimg.net/cdn/libs/bootstrap/2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script>
+
+    <title>AngularJS + Bootstrap Dropdown</title>
+</head>
+<body>
+<bs-dropdown data-menu-type="button" select-val="selected_status = selectedVal" preselected-item="selected_status" data-dropdown-data="statuses"></bs-dropdown>
+<bs-dropdown data-menu-type="button" select-val="selected_abc = selectedVal" preselected-item="selected_abc" data-dropdown-data="abc"></bs-dropdown>
+&nbsp; Selected Value : {{selected_status}}
+&nbsp; Selected abc : {{selected_abc}}
+</body>
+<script>
+    /*function Main($scope, $rootScope) {
+        $scope.statuses = [{
+            id: 1,
+            name: "Low"
+        }, {
+            id: 2,
+            name: "Normal"
+        }, {
+            id: 3,
+            name: "High"
+        }, {
+            id: 4,
+            name: "Urgent"
+        }, {
+            id: 5,
+            name: "Immediate"
+        }];
+        $scope.selected_status = 3;
+    }
+
+    angular.module('pof', []).directive('bsDropdown', function ($compile) {
+        return {
+            restrict: 'E',
+            scope: {
+                items: '=dropdownData',
+                doSelect: '&selectVal',
+                selectedItem: '=preselectedItem'
+            },
+            link: function (scope, element, attrs) {
+                var html = '';
+                switch (attrs.menuType) {
+                    case "button":
+                        html += '<div class="btn-group"><button class="btn button-label btn-info">Action</button><button class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>';
+                        break;
+                    default:
+                        html += '<div class="dropdown"><a class="dropdown-toggle" role="button" data-toggle="dropdown"  href="javascript:;">Dropdown<b class="caret"></b></a>';
+                        break;
+                }
+                html += '<ul class="dropdown-menu"><li ng-repeat="item in items"><a tabindex="-1" data-ng-click="selectVal(item)">{{item.name}}</a></li></ul></div>';
+                element.append($compile(html)(scope));
+                for (var i = 0; i < scope.items.length; i++) {
+                    if (scope.items[i].id === scope.selectedItem) {
+                        scope.bSelectedItem = scope.items[i];
+                        break;
+                    }
+                }
+                scope.selectVal = function (item) {
+                    switch (attrs.menuType) {
+                        case "button":
+                            $('button.button-label', element).html(item.name);
+                            break;
+                        default:
+                            $('a.dropdown-toggle', element).html('<b class="caret"></b> ' + item.name);
+                            break;
+                    }
+                    scope.doSelect({
+                        selectedVal: item.id
+                    });
+                };
+                scope.selectVal(scope.bSelectedItem);
+            }
+        };
+    });*/
+
+
+
+
+
+
+
+
+    angular.module("pof", [])
+        .controller("Main", function ($scope, $http) {
+            $scope.statuses = [{
+                id: 1,
+                name: "Low"
+            }, {
+                id: 2,
+                name: "Normal"
+            }, {
+                id: 3,
+                name: "High"
+            }, {
+                id: 4,
+                name: "Urgent"
+            }, {
+                id: 5,
+                name: "Immediate"
+            }];
+
+            $scope.abc = [{
+                id: 11,
+                name: "aaa"
+            }, {
+                id: 22,
+                name: "bbb"
+            }, {
+                id: 33,
+                name: "ccc"
+            }, {
+                id: 44,
+                name: "ddd"
+            }, {
+                id: 55,
+                name: "eee"
+            }];
+            $scope.selected_status = 3;
+            $scope.selected_abc = 22;
+
+    }).directive('bsDropdown', function ($compile) {
+        return {
+            restrict: 'E',
+            scope: {
+                items: '=dropdownData',
+                doSelect: '&selectVal',
+                selectedItem: '=preselectedItem'
+            },
+            link: function (scope, element, attrs) {
+                var html = '';
+                switch (attrs.menuType) {
+                    case "button":
+                        html += '<div class="btn-group"><button class="btn button-label btn-info">Action</button><button class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>';
+                        break;
+                    default:
+                        html += '<div class="dropdown"><a class="dropdown-toggle" role="button" data-toggle="dropdown"  href="javascript:;">Dropdown<b class="caret"></b></a>';
+                        break;
+                }
+                html += '<ul class="dropdown-menu"><li ng-repeat="item in items"><a tabindex="-1" data-ng-click="selectVal(item)">{{item.name}}</a></li></ul></div>';
+                element.append($compile(html)(scope));
+                for (var i = 0; i < scope.items.length; i++) {
+                    if (scope.items[i].id === scope.selectedItem) {
+                        scope.bSelectedItem = scope.items[i];
+                        break;
+                    }
+                }
+                scope.selectVal = function (item) {
+                    switch (attrs.menuType) {
+                        case "button":
+                            $('button.button-label', element).html(item.name);
+                            break;
+                        default:
+                            $('a.dropdown-toggle', element).html('<b class="caret"></b> ' + item.name);
+                            break;
+                    }
+                    scope.doSelect({
+                        selectedVal: item.id
+                    });
+                };
+                scope.selectVal(scope.bSelectedItem);
+            }
+        };
+    });
+</script>
+</html>
