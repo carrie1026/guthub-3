@@ -52,6 +52,7 @@
             this.busy = true;
 
             var url = "http://192.168.3.95:7002/api/post/nextpage?id=" + this.page + "&callback=JSON_CALLBACK";
+//            var url = 'http://localhost:63342/guthub-2/app/testSelf/showMore-1?' + this.page + "&callback=JSON_CALLBACK";
             $http.jsonp(url).success(function (data) {
                 var items = data;
                 for (var i = 0; i < items.length; i++) {
