@@ -8,23 +8,23 @@
 </head>
 <body ng-controller="ArticleCtrl">
 <article class="block post" id="{{article.id}}">
-    <span class="round-date">
+    <!--<span class="round-date">
         <span class="month" ng-bind="(article.post_time |dateUtil|date:'M')+'月'"></span>
-    <span class="day" ng-bind="article.post_time |dateUtil| date:'d'"></span>
-    </span>
+        <span class="day" ng-bind="article.post_time |dateUtil| date:'d'"></span>
+    </span>-->
     <header>
         <p class="title">
-            <a href="articleDetail.html?{{article.id}}" ng-bind="article.title" target="_blank"></a>
+            <a href="articleDetail.html?{{article.id}}" ng-bind="article.name" target="_blank"></a>
         </p>
         <p class="article-meta">
-            <i class="fa fa-paper-plane-o" ng-bind="article.post_time | date:'yyyy-MM-dd'"></i>
-            <i class="fa fa-eye" ng-bind="article.pageviews"></i>
-            <i class="fa fa-comment-o" ng-bind="article.comments"></i></p>
+            <!--<i class="fa fa-paper-plane-o" ng-bind="article.post_time | date:'yyyy-MM-dd'"></i>-->
+            <i class="fa fa-eye" ng-bind="article.id"></i>
+            <i class="fa fa-comment-o" ng-bind="article.name"></i></p>
         <div class="tag-meta">
-            <div class="tag" ng-repeat="tag in article.tags" ng-bind="tag"></div>
+            <div class="tag" ng-repeat="tag in article.courses" ng-bind="tag"></div>
         </div>
     </header>
-    <div class="article-content animate-show" ng-bind-html="article.post_abstract | to_trusted" ng-show="showMe"></div>
+    <div class="article-content animate-show"  ng-show="showMe"></div><!--ng-bind-html="article.post_abstract | to_trusted"-->
     <span class="fa fa-angle-double-up compress" ng-click="toggle()"></span>
 </article>
 
@@ -45,15 +45,16 @@
                 }
             })
                     .success(function(data, status, headers, config) {
+                        console.log(data.student);
                         if (i == 0) {
-                            $scope.articles = data;
+                            $scope.articles = data.student;
                             i++;
                         } else if (i >= 1)
-                            $scope["articles" + i++] = data;
+                            $scope["articles" + i++] = data.student;
                         offset = offset + limit;
 
                     }).error(function(data, status, headers, config) {
-                throw new Error('Something went wrong...');
+                        alert("error")
             }).then(function(result) {
 
                 $("pagination input").removeAttr("disabled");

@@ -18,12 +18,10 @@
         <div ng-repeat='item in demo.items'>
             <p>
                 <input type="hidden" value="{{item.PostId}}" />
-                <label>{{item.WriterName}}</label>
-                <label>{{item.WriterMail}}</label>
-                <label>{{item.WreckerName}}</label>
-                <label>{{item.StartDate}}</label>
-                <label>{{item.Location}}</label>
-                <label>{{item.Story}}</label>
+                <label>{{item.id}}</label>
+                <label>{{item.age}}</label>
+                <label>{{item.name}}</label>
+                <label>{{item.sex}}</label>
             </p>
         </div>
         <div ng-show='demo.busy'>Loading data...</div>
@@ -51,10 +49,16 @@
             if (this.busy) return;
             this.busy = true;
 
-            var url = "http://192.168.3.95:7002/api/post/nextpage?id=" + this.page + "&callback=JSON_CALLBACK";
-//            var url = 'http://localhost:63342/guthub-2/app/testSelf/showMore-1?' + this.page + "&callback=JSON_CALLBACK";
-            $http.jsonp(url).success(function (data) {
-                var items = data;
+            //var url = "http://192.168.3.95:7002/api/post/nextpage?id=" + this.page + "&callback=JSON_CALLBACK";
+            var url2 = "../data/data.json?&callback=JSON_CALLBACK";
+            var header = {
+                'Content-Type' : 'application/json'
+            };
+
+//            $http.jsonp(url2,header).success(function (data) {
+            $http.get(url2,header).success(function (data) {
+                console.log(data);
+                var items = data.student;
                 for (var i = 0; i < items.length; i++) {
                     this.items.push(items[i]);
                 }
