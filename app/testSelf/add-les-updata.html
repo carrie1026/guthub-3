@@ -1,0 +1,173 @@
+<script>
+  let commodityList = wx.getStorageSync('commodityList');
+        if (!commodityList) {
+            commodityList = [
+                {
+                    id: 1,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+                {
+                    id: 2,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+                {
+                    id: 3,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+                {
+                    id: 4,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+                {
+                    id: 5,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+                {
+                    id: 6,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+                {
+                    id: 7,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+                {
+                    id: 8,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+                {
+                    id: 9,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+                {
+                    id: 10,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+                {
+                    id: 11,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+                {
+                    id: 12,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+                {
+                    id: 13,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+                {
+                    id: 14,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+                {
+                    id: 15,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+                {
+                    id: 16,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+                {
+                    id: 17,
+                    name: '测试产品名称',
+                    src: 'https://guanli-test.sao.so/images/icon-setup.png',
+                    num: 1,
+                    specification: '150ml'
+                },
+
+            ];
+        }
+        this.setData({
+            commodityList
+        });
+    },
+    updateNum: function (isAdd, id, commodityList) {
+        return commodityList.map(function (commodity) {
+            if (commodity.id == id) {
+                isAdd ? (commodity.num++) : (commodity.num--);
+            }
+            return commodity;
+        });
+    },
+    addNum: function (e) {
+        //增加商品数量
+        let commodity = e.target.dataset.commodity;
+        let that = this;
+        this.setData({ commodityList: that.updateNum(true, commodity.id, that.data.commodityList) });
+    },
+    lessNum: function (e) {
+        let that = this;
+        //减少商品数量
+        let commodity = e.target.dataset.commodity;
+        console.log(e);
+        if (that.data.lastTime && (e.timeStamp - that.data.lastTime) > 300) {
+            this.setData({ updateStatus: true });
+            if (commodity.num <= 0) {
+                return;
+            }
+            this.setData({ commodityList: that.updateNum(false, commodity.id, that.data.commodityList), lastTime: e.timeStamp });
+        } else {
+            this.setData({ lastTime: e.timeStamp });
+        }
+    }
+</script>
+<body>
+  <div ng-repeat="{{commodityList}}">
+    <div class="commodity-item-container">
+      <image class="commodity-img" src="{{commodity.src}}"></image>
+      <text class="commodity-name">{{commodity.name}}</text>
+      <div class="commodity-num-container">
+        <view class="num-btn" data-commodity="{{commodity}}" bindtap="lessNum">-</div>
+        <text class="num-text">{{commodity.num? commodity.num:0}}</text>
+        <div class="num-btn" data-commodity="{{commodity}}" bindtap="addNum">+</div>
+      </div>
+    </div>
+  </div>
+</body>
