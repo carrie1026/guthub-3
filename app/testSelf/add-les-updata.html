@@ -1,7 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ftitApp">
+  <head>
+    <meta charset="UTF-8">
+    <title>num-add-less-updata</title>
+    <script src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script type='text/javascript' src='../scripts/vendor/angular.min.js'></script>
+    <script type='text/javascript' src='../scripts/vendor/ng-infinite-scroll.min.js'></script>
+  </head>
+  <body>
+  <div ng-repeat="{{commodityList}}">
+    <div class="commodity-item-container">
+      <image class="commodity-img" src="{{commodity.src}}"></image>
+      <text class="commodity-name">{{commodity.name}}</text>
+      <div class="commodity-num-container">
+        <view class="num-btn" data-commodity="{{commodity}}" bindtap="lessNum">-</div>
+        <text class="num-text">{{commodity.num? commodity.num:0}}</text>
+        <div class="num-btn" data-commodity="{{commodity}}" bindtap="addNum">+</div>
+      </div>
+    </div>
+  </div>
+</body>
 <script>
-  let commodityList = wx.getStorageSync('commodityList');
-        if (!commodityList) {
-            commodityList = [
+  var commodityList = [
                 {
                     id: 1,
                     name: '测试产品名称',
@@ -128,7 +148,7 @@
             commodityList
         });
     },
-    updateNum: function (isAdd, id, commodityList) {
+    $scope.updateNum= function (isAdd, id, commodityList) {
         return commodityList.map(function (commodity) {
             if (commodity.id == id) {
                 isAdd ? (commodity.num++) : (commodity.num--);
@@ -136,13 +156,13 @@
             return commodity;
         });
     },
-    addNum: function (e) {
+    $scope.addNum= function (e) {
         //增加商品数量
         let commodity = e.target.dataset.commodity;
         let that = this;
         this.setData({ commodityList: that.updateNum(true, commodity.id, that.data.commodityList) });
     },
-    lessNum: function (e) {
+    $scope.lessNum= function (e) {
         let that = this;
         //减少商品数量
         let commodity = e.target.dataset.commodity;
@@ -158,16 +178,5 @@
         }
     }
 </script>
-<body>
-  <div ng-repeat="{{commodityList}}">
-    <div class="commodity-item-container">
-      <image class="commodity-img" src="{{commodity.src}}"></image>
-      <text class="commodity-name">{{commodity.name}}</text>
-      <div class="commodity-num-container">
-        <view class="num-btn" data-commodity="{{commodity}}" bindtap="lessNum">-</div>
-        <text class="num-text">{{commodity.num? commodity.num:0}}</text>
-        <div class="num-btn" data-commodity="{{commodity}}" bindtap="addNum">+</div>
-      </div>
-    </div>
-  </div>
-</body>
+
+</html>
