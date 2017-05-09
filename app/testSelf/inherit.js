@@ -89,3 +89,32 @@ class Cat extends Animal {
 }
 
 let cat = new Cat()
+
+
+//用Object.assign添加新的原型方法
+//子类也会继承到这方法
+class P {
+	constructor () {
+		this.name = 'zhang';
+	}
+	say(says) {
+		console.log(this.name + says)
+	}
+}
+
+class X extends P{
+	constructor(){
+		super()
+		this.name = 'wang'
+	}
+}
+
+Object.assign(P.prototype, {
+	eat (food){
+		console.log(this.name + ' eating ' + food)
+	}
+})
+
+var y = new X()
+
+y.eat('apple')   //wang eating apple
